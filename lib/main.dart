@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'widgets/convert.dart';
+import 'widgets/history.dart';
 import 'widgets/input.dart';
 import 'widgets/result.dart';
 
@@ -22,11 +23,19 @@ class _MyAppState extends State<MyApp> {
   double result = 0;
   String newValue = "kelvin";
 
+  List<String> listViewItem = [];
+
   konversi() {
     setState(() {
       inputUser = double.parse(etInput.text);
-      reamur = 4 / 5 * inputUser;
-      kelvin = inputUser + 273;
+
+      if (newValue == "kelvin") {
+        result = inputUser + 273;
+        listViewItem.add("kelvin: $result");
+      } else {
+        result = inputUser * (4 / 5);
+        listViewItem.add("reamur: $result");
+      }
     });
   }
 
@@ -52,7 +61,7 @@ class _MyAppState extends State<MyApp> {
         body: Container(
           margin: EdgeInsets.all(8),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Input(etInput: etInput),
               //membuat dropdown
@@ -78,6 +87,14 @@ class _MyAppState extends State<MyApp> {
               Convert(
                 konversi: konversi,
               ),
+              Container(
+                margin: EdgeInsets.only(top:16,bottom: 18),
+                child: Text(
+                  "Riwayat Konversi",
+                  style: TextStyle(fontSize: 24),
+                ),
+              ),
+              History(listViewItem: listViewItem)
             ],
           ),
         ),
