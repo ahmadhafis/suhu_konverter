@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   double inputUser = 0;
   double kelvin = 0;
   double reamur = 0;
+  String newValue = "kelvin";
 
   konversi() {
     setState(() {
@@ -27,6 +28,14 @@ class _MyAppState extends State<MyApp> {
       kelvin = inputUser + 273;
     });
   }
+
+  _dropdownOnChanged(String value) {
+    setState(() {
+      newValue = value;
+    });
+  }
+
+  var listItem = ["kelvin", "reamur"];
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +54,18 @@ class _MyAppState extends State<MyApp> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Input(etInput: etInput),
+              //membuat dropdown
+              DropdownButton(
+                items: listItem.map((String value) {
+                  return DropdownMenuItem(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                value: newValue,
+                onChanged: _dropdownOnChanged,
+                isExpanded: true,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
