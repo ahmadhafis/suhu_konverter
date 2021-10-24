@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   double inputUser = 0;
   double kelvin = 0;
   double reamur = 0;
+  double result = 0;
   String newValue = "kelvin";
 
   konversi() {
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
         body: Container(
           margin: EdgeInsets.all(8),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Input(etInput: etInput),
               //membuat dropdown
@@ -67,16 +68,11 @@ class _MyAppState extends State<MyApp> {
                 isExpanded: true,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Result(
-                    result: kelvin,
-                    title: "Kelvin",
+                    result: result,
                   ),
-                  Result(
-                    result: reamur,
-                    title: "Reamur",
-                  )
                 ],
               ),
               Convert(
